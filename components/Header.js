@@ -9,8 +9,11 @@ import {
 } from '@heroicons/react/outline';
 
 import { HomeIcon } from '@heroicons/react/solid';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 function Header() {
+    const { data: session } = useSession();
+
     return (
         <div className='shadow-sm border-b bg-white sticky top-0 z-50'>
             <div className='flex justify-between max-w-6xl mx-5 lg:mx-auto'>
@@ -52,20 +55,27 @@ function Header() {
                 <div className='flex items-center justify-end space-x-4'>
                     <HomeIcon className='navBtn' />
                     <MenuIcon className='h-6 md:hidden cursor-pointer' />
-                    <div className='relative navBtn'>
-                        <PaperAirplaneIcon className='navBtn rotate-45' />
-                        <div className='absolute -top-1 -right-1 text-xs 
-                    text-white bg-red-500 rounded-full h-4 w-4 
-                    flex items-center justify-center animate-pulse'
-                        >
-                            5
-                        </div>
-                    </div>
-                    <PlusCircleIcon className='navBtn' />
-                    <UserGroupIcon className='navBtn' />
-                    <HeartIcon className='navBtn' />
 
-                    <img src='https://links.papareact.com/jjm' alt='user-image' className='rounded-full h-8' />
+                    {session ?
+                        <>
+                            <div className='relative navBtn'>
+                                <PaperAirplaneIcon className='navBtn rotate-45' />
+                                <div className='absolute -top-1 -right-1 text-xs focus:pointer-events-none  
+                                          text-white bg-red-500 rounded-full h-4 w-4 
+                                            flex items-center justify-center animate-pulse'
+                                >
+                                    5
+                                </div>
+                            </div>
+                            <PlusCircleIcon className='navBtn' />
+                            <UserGroupIcon className='navBtn' />
+                            <HeartIcon className='navBtn' />
+
+                            <img onClick={signOut} src={session.user.image} alt='user-image' className='rounded-full h-8' />
+                        </>
+                        :
+                        <button onClick={signIn}>Sign In</button>
+                    }
                 </div>
             </div>
         </div>
