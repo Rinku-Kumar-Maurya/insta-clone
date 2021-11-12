@@ -1,5 +1,5 @@
 # UI clone of Instagram
-![project demo](gifs/insta-clone.gif)
+![project demo](/gifs/insta-clone.gif)
 
 # Next.js + Tailwind CSS Example
 
