@@ -4,8 +4,6 @@ function MiniProfile() {
 
     const {data: session} = useSession();
 
-    console.log(session);
-
     return (
         <div className='flex items-center mt-14 ml-11'>
             <img

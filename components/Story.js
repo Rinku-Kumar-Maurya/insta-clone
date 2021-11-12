@@ -1,5 +1,4 @@
 function Story(props) {
-    console.log(props);
     return (
         <div>
             <img className='h-14 w-14 rounded-full border-red-500 
